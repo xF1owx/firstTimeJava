@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" class="blink2">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+    <link id="feuilledestyle"rel="stylesheet" type="text/css" href="astyle.css">
+   
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   
+    <title>Plus ou moins</title>
+</head>
+<body class="blink2">
+
+
+        <div class="game">
+
+
+        <div class="blink"> <p class="epileptic">GUESS THE NUMBER </p></div>
+
+        <script type="text/javascript"> // Début de l'appli ///
+
+
+        function nb_aleatoire(min, max)             /////////////////
+
+        {
+
+             var nb = min + (max-min+1)*Math.random();  
+
+             return Math.floor(nb);// valeur fixée appelée nb)
+
+        }                                           
+
+            function manche(min, max)
+
+{
+
+     var nb = nb_aleatoire(min, max);        // nb a deviner
+
+     var cpt = 0;    // nb de coups pour le trouver
+
+     var saisie;     // nb tape par le joueur
+
+     var msg = 'Le nombre a deviner est compris entre ' + min + ' et ' + max + '.'; 
+
+
+     do
+
+     {
+
+          saisie = prompt(msg);
+
+
+          // si "Annuler"
+
+          if(saisie == null)
+
+               return 0;
+
+
+          cpt++;
+
+          if(saisie > nb)
+
+               msg = "C'est moins";
+
+
+
+          else
+
+               msg = "C'est plus";
+
+     }
+
+     while(saisie != nb);
+
+
+     return cpt;
+
+}
+
+
+function ChangeStyleSheet(sheet) {
+      document.getElementById('feuilledestyle').setAttribute('href', sheet);
+}
+
+
+      
+
+function PoM_partie(min, max)
+
+{
+
+     var cpt = 0;    // nb de manches jouees
+
+     var best_score = 0;     // meilleur score
+
+     var score;      // score de la partie en cours
+
+     var continuer;
+
+
+     do
+
+     {
+
+          score = manche(min, max);   // joue la manche
+
+          if(score)
+
+          {
+
+               cpt++;
+
+               if(score < best_score || best_score == 0)
+
+                    best_score = score;
+
+               continuer = confirm(" Yeah! You won in  " + score + "  try / tries .\nWanna play again ? ?");
+
+          }
+
+
+
+          else
+
+               continuer = false;
+
+     }
+
+     while(continuer);
+
+
+     alert("You played " + cpt + " time(s).\n Your best score is  " + best_score + " tries.");
+
+
+     return best_score;
+
+}
+
+
+</script>
+
+
+</head>
+<p>Choisissez une difficulté ! :</p>
+
+<body>
+
+<div class="lvl blink2">
+
+<p>
+
+     <button href="#" onclick="javascript:PoM_partie(1,200)">Niveau N00B</button><br />
+       <!-- appel de fonction sout forme de lien modifiable  ( x,x )-->
+       <button href="#" onclick="javascript:PoM_partie(1,200000000000)">Niveau Impossible</button><br />
+
+       <button href="#" onclick="javascript:PoM_partie(1,6)">Niveau Légume</button><br />
+
+       
+</p>
+</div>
+</div>  
+<h2> HARCORE MODE</h2>
+
+<button id="squarered" class="square" onclick="ChangeStyleSheet('blink.css')">ON</button>
+<button id="squareblue" class="square" onclick="ChangeStyleSheet('astyle.css')">OFF</button>
+</body>
+
+</html>
+
